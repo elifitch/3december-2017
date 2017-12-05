@@ -6,7 +6,7 @@
   "scripts": {
     "test": "test",
     "build": "webpack --config ./webpack/webpack.config.js",
-    "build-simple": "rm -rf dist/ && webpack --config ./webpack/webpack-codepen.config.js",
+    "build-simple": "rm -rf dist/ && webpack --config ./webpack/webpack-simple.config.js",
     "start": "webpack-dev-server --config ./webpack/webpack.config.js"
   },
   "author": "Eli Fitch",

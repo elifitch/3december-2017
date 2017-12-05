@@ -6,20 +6,20 @@ import vert from './shaders/vert.glsl';
 import Renderer from './renderer';
 import Scene from './scene';
 import Sphere from './sphere';
-import makeOrbitControls from 'three-orbit-controls';
 import Animate from './animate';
-const OrbitControls = makeOrbitControls(THREE);
+import 'three/OrbitControls';
 
 const containerEl = document.getElementsByClassName('container')[0];
 
-const renderer = Renderer({containerEl});
 const { scene, camera } = Scene({
   cameraPos: [5, 0, 0],
   cameraAspect: containerEl.offsetWidth / containerEl.offsetHeight,
   cameraFov: 45
 });
 
-const controls = new OrbitControls(camera);
+const renderer = Renderer({ containerEl, scene, camera });
+
+const controls = new THREE.OrbitControls(camera);
 controls.enableDamping = true;
 controls.rotateSpeed = 0.5;
 controls.dampingFactor = 0.25;

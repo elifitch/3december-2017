@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-function Renderer({containerEl, clearColor}) {
+function Renderer({containerEl, clearColor, scene, camera}) {
   const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
   const w = containerEl.offsetWidth;
   const h = containerEl.offsetHeight;

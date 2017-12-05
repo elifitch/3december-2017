@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
 const path = require('path');
 
 const distPath = __dirname + '/../dist';
@@ -17,6 +18,11 @@ module.exports = {
   },
   node: {
     fs: 'empty'
+  },
+  resolve: {
+    alias: {
+      'three/OrbitControls': path.join(__dirname, '../node_modules/three/examples/js/controls/OrbitControls.js')
+    }
   },
   module: {
     rules: [
@@ -65,6 +71,9 @@ module.exports = {
       filename: 'index.html',
       title: 'three-js-experiment'
     }),
-    new ExtractTextPlugin("styles.css")
+    new ExtractTextPlugin("styles.css"),
+    new webpack.ProvidePlugin({
+      'THREE': 'three'
+    })
   ]
 };
