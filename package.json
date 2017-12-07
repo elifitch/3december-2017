@@ -1,0 +1,19 @@
+{
+  "name": "3december-2017",
+  "version": "1.0.0",
+  "description": "3December projects from Dec 2017",
+  "main": "''",
+  "scripts": {
+    "new-project": "git clone git@github.com:elifitch/three-boilerplate.git && rm -rf ./three-boilerplate/.git && mv ./three-boilerplate "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elifitch/3december-2017.git"
+  },
+  "author": "Eli Fitch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elifitch/3december-2017/issues"
+  },
+  "homepage": "https://github.com/elifitch/3december-2017#readme"
+}
