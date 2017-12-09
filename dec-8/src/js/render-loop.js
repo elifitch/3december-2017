@@ -1,8 +1,9 @@
-function RenderLoop({renderer, scene, camera, controls}) {
+function RenderLoop({renderer, scene, camera, controls, time}) {
   if (controls) {
     controls.update();
   }
-  window.requestAnimationFrame(() => RenderLoop({renderer, scene, camera, controls}));
+  time.value += 0.0025;
+  window.requestAnimationFrame(() => RenderLoop({renderer, scene, camera, controls, time}));
   renderer.render(scene, camera);
 }
 

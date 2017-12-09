@@ -24,9 +24,12 @@ controls.enableDamping = true;
 controls.rotateSpeed = 0.5;
 controls.dampingFactor = 0.25;
 
-scene.add(Sphere({
+const sphere = Sphere({
   fragmentShader: frag,
   vertexShader: vert
-}));
+});
 
-RenderLoop({renderer, scene, camera, controls});
+scene.add(sphere);
+console.log(sphere.material.uniforms.time)
+
+RenderLoop({ renderer, scene, camera, controls, time: sphere.material.uniforms.time});
