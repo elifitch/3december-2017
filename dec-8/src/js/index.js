@@ -11,7 +11,7 @@ import 'three/OrbitControls';
 
 const containerEl = document.getElementsByClassName('container')[0];
 
-const renderer = Renderer({containerEl, clearColor: 0xEFEFEF});
+const renderer = Renderer({containerEl});
 const { scene, camera } = Scene({
   // cameraPos: [10, 0, 0],
   cameraPos: [60, 0, 0],
@@ -30,6 +30,10 @@ const sphere = Sphere({
 });
 
 scene.add(sphere);
-console.log(sphere.material.uniforms.time)
+window.addEventListener('resize', () => {
+  renderer.setSize(containerEl.offsetWidth, containerEl.offsetHeight);
+  camera.aspect = containerEl.offsetWidth / containerEl.offsetHeight;
+  camera.updateProjectionMatrix();
+});
 
 RenderLoop({ renderer, scene, camera, controls, time: sphere.material.uniforms.time});
