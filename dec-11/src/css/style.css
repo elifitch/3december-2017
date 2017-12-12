@@ -1,0 +1,8 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+}
+canvas {
+  position: absolute;
+  background: #0f0e47;
+}
