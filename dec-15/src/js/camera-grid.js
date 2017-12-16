@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import LoadCamera from './load-camera';
+
 const objSize = {
   x: 0.25,
   y: 0.25,
@@ -15,22 +17,24 @@ function Recty() {
   return rect;
 }
 
-function makeRecties(numX, numY) {
+function MakeGrid(numX, numY) {
   // https://stackoverflow.com/questions/32848707/three-js-arranging-cubes-in-a-grid
   const hCount = numX;
   const vCount = numY;
-  const spacing = 0.75;
+  const hSpacing = 10;
+  const vSpacing = 10;
   const grid = new THREE.Object3D();
 
   for (let h = 0; h < hCount; h += 1) {
     for (let v = 0; v < vCount; v += 1) {
-      const box = Recty();
-      box.position.x = ((h - hCount / 2) * spacing) + (spacing / 2);
-      box.position.y = ((v - vCount / 2) * spacing) + (spacing / 2);
-      grid.add(box);
+      LoadCamera().then(cam => {
+        cam.position.x = ((h - hCount / 2) * hSpacing) + (hSpacing / 2);
+        cam.position.y = ((v - vCount / 2) * vSpacing) + (vSpacing / 2);
+        grid.add(cam);
+      });
     }
   }
   return grid;
 }
 
-export default makeRecties;
+export default MakeGrid;

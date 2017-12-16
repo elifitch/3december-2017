@@ -4,16 +4,21 @@ function Scene({cameraPos, cameraFov, cameraAspect}) {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera( cameraFov, cameraAspect, 1, 10000 );
 
-  const dirLight = new THREE.DirectionalLight(0xFFFFFF);
-  dirLight.castShadow = true;
-  dirLight.position.set(10, 5, 5);
-  const dirLightHelper = new THREE.DirectionalLightHelper(dirLight, 2, 0xFF00FF);
-  const ambientLight = new THREE.AmbientLight(0x666);
+  const spotLight = new THREE.SpotLight(0xFFFFFF, 1, 200, 1.0, 0.1, 2);
+  spotLight.castShadow = true;
+  spotLight.position.set(20, 20, 60);
+  spotLight.shadow.mapSize.width = 256;
+  spotLight.shadow.mapSize.height = 256;
+  spotLight.shadow.camera.near = 0.5;
+  spotLight.shadow.camera.far = 1000;
+  const ambientLight = new THREE.AmbientLight(0x111111);
+  const hemiLight = new THREE.HemisphereLight(0xFFFFFF, '#867a6a', 1);
 
   const bgPlane = new THREE.Mesh(
-    new THREE.PlaneGeometry(10, 10),
+    new THREE.PlaneGeometry(150, 150),
     new THREE.ShadowMaterial({
-      color: 0xdddddd
+      color: 0x111111,
+      opacity: 0.1
     })
   );
   bgPlane.receiveShadow = true;
@@ -23,9 +28,9 @@ function Scene({cameraPos, cameraFov, cameraAspect}) {
 	camera.lookAt(scene.position);
 	
   scene.add(camera);
-  scene.add(dirLightHelper);
-  scene.add(dirLight);
+  scene.add(spotLight);
   scene.add(ambientLight);
+  scene.add(hemiLight);
   scene.add(bgPlane);
   return { scene, camera };
 }

@@ -12,11 +12,32 @@ function Look(container, mouseX, mouseY, camera) {
   }
   rayCaster.setFromCamera(normalizedMouse, camera);
   rayCaster.ray.intersectPlane(intersectPlane, intersectPoint);
-  intersectPoint.setZ(3);
+  intersectPoint.setZ(25);
 
   container.children.forEach(child => {
-    child.lookAt(intersectPoint);
+    const cam = child.children[0];
+    const distanceFactor = cam.position.distanceTo(intersectPoint);
+    const lookVector = new THREE.Vector3(
+      intersectPoint.x,
+      intersectPoint.y,
+      intersectPoint.z
+    )
+    child.children[0].lookAt(worldToLocal(lookVector, cam));
   });
+}
+
+const worldToLocal = (vector, obj) => {
+
+  var objRotationMatrix = new THREE.Matrix4().extractRotation(obj.parent.matrixWorld);
+
+  var objTranslationMatrix = new THREE.Matrix4().extractPosition(obj.parent.matrixWorld);
+  var mat = new THREE.Matrix4().multiply(objTranslationMatrix, objRotationMatrix);
+  var inv = new THREE.Matrix4().getInverse(mat);
+
+  var world = new THREE.Vector4(vector.x, vector.y, vector.z, 1);
+  inv.multiplyVector4(world);
+
+  return new THREE.Vector3(world.x, world.y, world.z);
 }
 
 export default Look;

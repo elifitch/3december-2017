@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 function Renderer({containerEl, clearColor}) {
-  const renderer = new THREE.WebGLRenderer({antialias: true});
+  const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const w = containerEl.offsetWidth;
