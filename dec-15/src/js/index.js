@@ -12,11 +12,13 @@ let cW = containerEl.offsetWidth;
 let cH = containerEl.offsetHeight;
 
 const renderer = Renderer({ containerEl });
+const cameraElevation = 2;
 const { scene, camera } = Scene({
-  cameraPos: [0, 0, 1000],
+  cameraPos: [0, cameraElevation, 250],
   cameraAspect: cW / cH,
-  cameraFov: 5
+  cameraFov: 20
 });
+camera.lookAt(0, cameraElevation, 0)
 
 const grid = MakeGrid(10, 6);
 scene.add(grid);
